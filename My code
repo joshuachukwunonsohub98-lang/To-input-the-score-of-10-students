@@ -1,0 +1,77 @@
+# -------------------------------
+# 1. Input 10 Scores & Compute Average
+# -------------------------------
+scores = []
+print("Enter 10 student scores:")
+for i in range(10):
+    score = int(input(f"Score {i+1}: "))
+    scores.append(score)
+
+print("\nOriginal Scores:", scores)
+
+# Compute Average
+average = sum(scores) / len(scores)
+print("Average Score:", average)
+
+# -------------------------------
+# 2. Insert a New Score at 5th Position
+# -------------------------------
+new_score = int(input("\nEnter a new score to insert at 5th position: "))
+scores.insert(4, new_score)  # Index 4 = 5th position
+
+print("Scores After Insertion:", scores)
+
+# -------------------------------
+# 3. Delete the Lowest Score
+# -------------------------------
+lowest = min(scores)
+scores.remove(lowest)
+
+print("Scores After Deleting Lowest Score:", scores)
+
+# -------------------------------
+# 4A. Linear Search
+# -------------------------------
+def linear_search(arr, target):
+    for i in range(len(arr)):
+        if arr[i] == target:
+            return i
+    return -1
+
+# -------------------------------
+# 4B. Binary Search (array must be sorted)
+# -------------------------------
+def binary_search(arr, target):
+    low, high = 0, len(arr) - 1
+    while low <= high:
+        mid = (low + high) // 2
+        if arr[mid] == target:
+            return mid
+        elif target < arr[mid]:
+            high = mid - 1
+        else:
+            low = mid + 1
+    return -1
+
+# Searching a score
+search_value = int(input("\nEnter a score to search: "))
+
+# Linear Search
+lin_result = linear_search(scores, search_value)
+print("\nLinear Search Result:")
+if lin_result != -1:
+    print(f"Found at position {lin_result + 1}")
+else:
+    print("Score not found.")
+
+# Binary Search
+sorted_scores = sorted(scores)
+bin_result = binary_search(sorted_scores, search_value)
+
+print("\nBinary Search Result (using sorted array):")
+print("Sorted Scores:", sorted_scores)
+
+if bin_result != -1:
+    print(f"Found at position {bin_result + 1}")
+else:
+    print("Score not found.")
